@@ -60,6 +60,7 @@
 		4CF9908F142C41580023334F /* LKBadgeViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKBadgeViewTests.m; sourceTree = "<group>"; };
 		4CF9909A142C42270023334F /* LKBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKBadgeView.h; sourceTree = "<group>"; };
 		4CF9909B142C42270023334F /* LKBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKBadgeView.m; sourceTree = "<group>"; };
+		C03A0E701BA7BF5300FDA18C /* TRLKBadgeView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = TRLKBadgeView.podspec; sourceTree = "<group>"; };
 		CEF95667190797D0006C1233 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +92,7 @@
 		4CF99050142C41570023334F = {
 			isa = PBXGroup;
 			children = (
+				C03A0E701BA7BF5300FDA18C /* TRLKBadgeView.podspec */,
 				CEF95667190797D0006C1233 /* Default-568h@2x.png */,
 				4CF99099142C41850023334F /* Classes */,
 				4CF99065142C41580023334F /* SampleApplication */,
@@ -210,7 +212,7 @@
 			name = LKBadgeViewTests;
 			productName = LKBadgeViewTests;
 			productReference = 4CF9907F142C41580023334F /* LKBadgeViewTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -218,7 +220,7 @@
 		4CF99052142C41570023334F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0640;
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 4CF99055142C41570023334F /* Build configuration list for PBXProject "LKBadgeView" */;
@@ -362,7 +364,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -379,7 +381,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
