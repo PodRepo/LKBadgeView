@@ -44,9 +44,9 @@ typedef enum {
 // Constants
 #define LK_BADGE_VIEW_STANDARD_HEIGHT       20.0
 #define LK_BADGE_VIEW_LARGE_HEIGHT          30.0
-#define LK_BADGE_VIEw_STANDARD_WIDTH        30.0
-#define LK_BADGE_VIEw_MINIMUM_WIDTH         22.0
-#define LK_BADGE_VIEW_FONT_SIZE             16.0
+#define LK_BADGE_VIEw_STANDARD_WIDTH        15.0 // 30 -> 15
+#define LK_BADGE_VIEw_MINIMUM_WIDTH         22.0 // not used
+#define LK_BADGE_VIEW_FONT_SIZE             12.0
 
 
 @interface LKBadgeView : UIView
@@ -68,6 +68,9 @@ typedef enum {
 @property (nonatomic, assign) BOOL shadowOfOutline;
 @property (nonatomic, assign) BOOL shadowOfText;
 @property (nonatomic, assign) CGSize textOffset;
+
+// add by wuyr
+@property (nonatomic, assign, readonly) CGSize badgeSize;
 
 + (CGFloat)badgeHeight; // @depricated
 - (CGFloat)badgeHeight;

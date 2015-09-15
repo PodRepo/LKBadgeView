@@ -52,11 +52,9 @@
 @synthesize shadowOfText = shadowOfText_;
 @synthesize textOffset = textOffset_;
 
-#pragma mark -
-#pragma mark Privates
+#pragma mark - Privates
 
-- (void)_setupBasics
-{
+- (void)_setupBasics {
     self.backgroundColor = [UIColor clearColor];
     self.horizontalAlignment = LKBadgeViewHorizontalAlignmentCenter;
     self.widthMode = LKBadgeViewWidthModeStandard;
@@ -68,12 +66,11 @@
     self.shadowOffset = CGSizeMake(1.0, 1.0);
     self.shadowBlur = 2.0;
     self.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    self.font = [UIFont boldSystemFontOfSize:LK_BADGE_VIEW_FONT_SIZE];
+    self.font = [UIFont systemFontOfSize:LK_BADGE_VIEW_FONT_SIZE];
     self.textOffset = CGSizeMake(0.0, 0.0);
 }
 
-- (void)_setupDefaultWithoutOutline
-{
+- (void)_setupDefaultWithoutOutline {
     self.textColor = [UIColor whiteColor];
     self.badgeColor = [UIColor grayColor];
 
@@ -84,8 +81,7 @@
     [self _setupBasics];
 }
 
-- (void)_setupDefaultWithOutline
-{
+- (void)_setupDefaultWithOutline {
     self.textColor = [UIColor grayColor];
     self.badgeColor = [UIColor whiteColor];
 
@@ -96,8 +92,7 @@
     [self _setupBasics];
 }
 
-- (void)_adjustBadgeFrameX
-{
+- (void)_adjustBadgeFrameX {
     CGFloat realOutlineWith = outline_ ? outlineWidth_ : 0.0;
     switch (self.horizontalAlignment) {
         case LKBadgeViewHorizontalAlignmentLeft:
@@ -114,18 +109,14 @@
     }
 }
 
-- (void)_adjustBadgeFrameWith
-{
-    
+- (void)_adjustBadgeFrameWith {
     UIFont *font = self.font;
     if (!font) {
         font = [UIFont systemFontOfSize:15.0];
     }
-//    CGSize suffixSize = [LK_BADGE_VIEW_TRUNCATED_SUFFIX sizeWithFont:self.font];
     CGSize suffixSize = [LK_BADGE_VIEW_TRUNCATED_SUFFIX sizeWithAttributes:@{NSFontAttributeName:font}];
-    
+
     CGFloat paddinWidth = LK_BADGE_VIEW_HORIZONTAL_PADDING*2;
-//    CGSize size = [self.displayinText sizeWithFont:self.font];
     CGSize size = [self.displayinText sizeWithAttributes:@{NSFontAttributeName:font}];
     badgeFrame_.size.width = size.width + paddinWidth;
     
@@ -155,8 +146,7 @@
     }
 }
 
-- (void)_adjustBadgeFrame
-{
+- (void)_adjustBadgeFrame {
     badgeFrame_.size.height = [self badgeHeight];
 
     if (self.displayinText == nil || [self.displayinText length] == 0) {
@@ -169,8 +159,7 @@
     [self _adjustBadgeFrameX];
 }
 
-#pragma mark -
-#pragma mark Basics
+#pragma mark - Basics
 
 - (id)init {
     self = [super init];
@@ -179,8 +168,8 @@
     }
     return self;
 }
-- (id)initWithFrame:(CGRect)frame
-{
+
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self _setupDefaultWithoutOutline];
@@ -197,15 +186,11 @@
 }
 - (void)dealloc {
     self.badgeColor = nil;
-    
 }
 
+#pragma mark - Overrides
 
-#pragma mark -
-#pragma mark Overrides
-
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     if (self.displayinText == nil || [self.displayinText length] == 0) {
         return;
     }
@@ -266,12 +251,10 @@
     
     // draw text
     if (self.text != nil || [self.text length] > 0) {
-        
         UIFont *font = self.font;
         if (!font) {
             font = [UIFont systemFontOfSize:15.0];
         }
-        
         [self.textColor setFill];
         CGSize size = [self.displayinText sizeWithAttributes:@{NSFontAttributeName:font}];
         CGPoint p = CGPointMake(bp.x + (badgeFrame_.size.width - size.width)/2.0 + textOffset_.width,
@@ -280,9 +263,8 @@
         if (self.shadowOfText) {
             CGContextSaveGState(context);
             CGContextSetShadowWithColor(context, self.shadowOffset, self.shadowBlur, self.shadowColor.CGColor);
-//            [self.displayinText drawAtPoint:p withFont:self.font];
             [self.displayinText drawAtPoint:p withAttributes:@{NSFontAttributeName:font}];
-            CGContextRestoreGState(context);
+            CGContextRestoreGState(context);            
         } else {
             [self.displayinText drawAtPoint:p withAttributes:@{NSFontAttributeName:font}];
         }
@@ -290,17 +272,14 @@
     
 }
 
-- (void)setFrame:(CGRect)frame
-{
+- (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     [self _adjustBadgeFrame];
 }
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString *)text {
     text_ = text;
     
     self.displayinText = text;
@@ -309,83 +288,70 @@
     [self setNeedsDisplay];
 }
 
-- (void)setHorizontalAlignment:(LKBadgeViewHorizontalAlignment)horizontalAlignment
-{
+- (void)setHorizontalAlignment:(LKBadgeViewHorizontalAlignment)horizontalAlignment {
     horizontalAlignment_ = horizontalAlignment;
     [self _adjustBadgeFrameX];    
     [self setNeedsDisplay];
 }
 
-- (void)setWidthMode:(LKBadgeViewWidthMode)widthMode
-{
+- (void)setWidthMode:(LKBadgeViewWidthMode)widthMode {
     widthMode_ = widthMode;
     [self _adjustBadgeFrameWith];
     [self setNeedsDisplay];
 }
 
-- (void)setOutlineWidth:(CGFloat)outlineWidth
-{
+- (void)setOutlineWidth:(CGFloat)outlineWidth {
     outlineWidth_ = outlineWidth;
     [self _adjustBadgeFrame];
     [self setNeedsDisplay];
 }
 
-- (void)setOutline:(BOOL)outline
-{
+- (void)setOutline:(BOOL)outline {
     outline_ = outline;
     [self setNeedsDisplay];
 }
 
-- (void)setShadow:(BOOL)shadow
-{
+- (void)setShadow:(BOOL)shadow {
     shadow_ = shadow;
     [self setNeedsDisplay];
 }
 
-- (void)setShadowOfOutline:(BOOL)shadowOfOutline
-{
+- (void)setShadowOfOutline:(BOOL)shadowOfOutline {
     shadowOfOutline_ = shadowOfOutline;
     [self setNeedsDisplay];
 }
 
-- (void)setShadowOfText:(BOOL)shadowOfText
-{
+- (void)setShadowOfText:(BOOL)shadowOfText {
     shadowOfText_ = shadowOfText;
     [self setNeedsDisplay];
 }
 
-- (void)setBadgeColor:(UIColor *)badgeColor
-{
+- (void)setBadgeColor:(UIColor *)badgeColor {
     badgeColor_ = badgeColor;
     
     [self setNeedsDisplay];
 }
 
-- (void)setTextColor:(UIColor *)textColor
-{
+- (void)setTextColor:(UIColor *)textColor {
     textColor_ = textColor;
     
     [self setNeedsDisplay];
 }
 
-- (void)setFont:(UIFont *)font
-{
+- (void)setFont:(UIFont *)font {
     font_ = font;
     
     [self _adjustBadgeFrame];
     [self setNeedsDisplay];
 }
 
-#pragma mark -
-#pragma mark API (@depricated)
+#pragma mark - API (@depricated)
 
-+ (CGFloat)badgeHeight
-{
++ (CGFloat)badgeHeight {
     return LK_BADGE_VIEW_STANDARD_HEIGHT;
 }
 
-- (CGFloat)badgeHeight
-{
+- (CGFloat)badgeHeight {
     CGFloat height;
     switch (self.heightMode) {
         case LKBadgeViewHeightModeStandard:
@@ -400,5 +366,10 @@
             break;
     }
     return height;
+}
+
+-(CGSize)badgeSize
+{
+    return badgeFrame_.size;
 }
 @end
